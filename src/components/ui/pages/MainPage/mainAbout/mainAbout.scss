@@ -1,0 +1,250 @@
+//about 
+
+.main-about{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 40px;
+    margin-bottom: 120px;
+}
+
+.about-schrift{
+    max-width: 660px;
+    height: 750px;
+}
+
+.about-content{
+    max-width: 660px;
+    height: 750px;
+}
+
+.about-schrift-title{
+    max-width: 466px;
+
+    font-size: 80px;
+    font-weight: 500;
+    line-height: 88px;
+    text-align: left;
+}
+
+.about-schrift-block-image{
+    padding: 110px 82px 0px 82px;
+}
+
+.about-schrift-image{
+    width: 496px;
+    height: 464px;
+
+    background-image: url('./images/AboutImage.svg');
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.about-content-description{
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 33.6px;
+    letter-spacing: -0.5px;
+}
+
+.about-content{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.about-content-item-article{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.about-content-items{
+    display: flex;
+    flex-direction: row;
+    gap: 56px;
+
+    flex-wrap: wrap;
+}
+
+.about-content-item{
+    width: 240px;
+    height: 276px;
+    padding: 16px;
+
+    background-image: url('./images/CardItem.svg');
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.about-content-item-icon{
+    margin-bottom: 16px;
+}
+
+.about-content-item-title{
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 19.8px;
+    letter-spacing: -0.5px;
+}
+
+.about-content-item-description{
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 22.4px;
+    letter-spacing: -0.25px;
+}
+
+.about-content-item-code{
+    margin-top: 32px;
+}
+
+@media (max-width: 1280px) {
+    .about-content-items{
+        gap: 20px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .about-schrift-block-image{
+        padding: 80px 20px 0px 20px;
+    }
+
+    .main-about{
+        gap: 5px;
+    }
+
+    .about-content-items{
+        gap: 10px;
+    }
+
+    .about-content-item{
+        width: 218px;
+        height: 250px;
+    }
+
+    .about-content-item-article{
+        gap: 4px;
+    }
+
+    .about-content-item-code{
+        margin-top: 20px;
+        width: 186px;
+    }
+
+    .about-content-item-icon{
+        margin-bottom: 10px;
+    }
+
+    .about-content-item-title{
+        font-size: 16px;
+    }
+
+    .about-content-item-description{
+        font-size: 13px;
+    }
+
+    .about-schrift-image{
+        width: 446px;
+        height: 424px;
+    }
+
+    .about-content-description{
+        max-width: 445px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-about{
+        flex-direction: row;
+    }
+
+    .about-schrift-title{
+        font-size: 50px;
+        line-height: 50px;
+    }
+
+    .about-schrift-block-image{
+        padding: 40px 10px 0px 10px;
+    }
+
+    .about-schrift-image{
+        width: 256px;
+        height: 224px;
+    }
+
+    .about-content-description{
+        font-size: 18px;
+        line-height: 20px;
+    }
+
+    .about-schrift{
+        height: 400px;
+    }
+}
+
+@media (max-width: 767px) {
+    .main-art{
+        margin-bottom: 50px;
+    }
+
+    .about-schrift{
+        height: 300px;
+    }
+
+    .main-about{
+        flex-direction: column;
+        margin-bottom: 60px;
+    }
+
+    .about-schrift-image{
+        width: 156px;
+        height: 144px;
+    }
+
+    .about-content-item{
+        width: 160px;
+        height: 185px;
+    }
+
+    .about-content-item-title{
+        font-size: 11px;
+        line-height: 13px;
+    }
+
+    .about-content-item-description{
+        font-size: 10px;
+        line-height: 13px;
+    }
+
+    .about-content-item-code{
+        width: 128px;
+        margin-top: 12px;
+    }
+
+    .about-content-item-icon{
+        margin-bottom: 5px;
+    }
+
+    .about-content{
+        max-height: 550px;
+    }
+
+    .about-content-items{
+        justify-content: center;
+    }
+
+    .about-schrift-block-image{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .about-content-description{
+        text-align: center;
+    }
+
+    .about-schrift-title{
+        text-align: center;
+    }
+}

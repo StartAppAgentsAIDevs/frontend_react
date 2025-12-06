@@ -1,0 +1,135 @@
+.main-testimonials{
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+
+    margin-bottom: 120px;
+}
+
+.main-testimonials-title{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+.main-testimonials-text{
+    text-align: center;
+    color: rgba(241, 241, 241, 1);
+
+    font-size: 80px;
+    font-weight: 500;
+    line-height: 88px;
+}
+
+.main-testimonials-description{
+    letter-spacing: -0.5px;
+    max-width: 900px;
+    text-align: center;
+    color: rgba(241, 241, 241, 1);
+
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 33.6px;
+}
+
+.main-testimonials-list-items{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    gap: 24px;
+}
+
+.main-testimonials-list-item{
+    width: 387px;
+    height: 143px;
+
+    background-image: url('./images/card-item.svg');
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.main-testimonials-list-item-text{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 12px 22px;
+}
+
+.main-testimonials-list-item-title{
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19.52px;
+}
+
+.main-testimonials-list-item-pre-title{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17.08px;
+
+    font-style: italic;
+
+    opacity: 60%;
+}
+
+.main-testimonials-list-item-description{
+    padding: 23px 22px 25px 22px;
+
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17.08px;
+
+    text-align: center;
+}
+
+.main-testimonials-more{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.main-testimonials-more-title{
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 33.6px;
+}
+
+@media (max-width: 768px) {
+    .main-testimonials{
+        margin-bottom: 60px;
+    }
+
+    .main-testimonials-text{
+        font-size: 50px;
+        line-height: 50px;
+    }
+
+    .main-testimonials-description{
+        font-size: 14px;
+        line-height: 22px;
+    }
+
+    .main-testimonials-list-items{
+        gap: 10px;
+    }
+
+    .main-testimonials-list-item{
+        width: 358px;
+        height: 135px;
+    }
+
+    .main-testimonials-list-item-description{
+        padding: 18px 12px 18px 12px;
+    }
+
+    .main-testimonials-list-item-pre-title{
+        font-size: 12px;
+        line-height: 14px;
+    }
+}

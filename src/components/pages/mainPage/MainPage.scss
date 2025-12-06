@@ -1,0 +1,125 @@
+.wrapper{
+    max-width: 1360px;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+}
+
+.main-art{
+    height: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    background-image: url('../../assets/images/MainSection.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+
+    margin-bottom: 120px
+}
+
+.main-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.main-article {
+    width: 244px;
+}
+
+.main-center-article-title {
+    font-size: 140px;
+    line-height: 137.2px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.main-article-title {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 26.4px;
+    margin-bottom: 8px;
+}
+
+.main-article-description {
+    font-size: 16px;
+    line-height: 17.6px;
+    color: rgba(241, 241, 241, 1);
+    opacity: 80%;
+}
+
+.main-bottom-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    gap: 24px;
+}
+
+.main-bottom-article-title {
+    font-size: 16px;
+    line-height: 16px;
+    white-space: nowrap;
+    font-weight: 500;
+}
+
+.line {
+    height: 1px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.main-bottom-button {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 16px;
+    white-space: nowrap;
+
+    color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    background-color: rgba(0, 0, 0, 1);
+    padding: 18px 24px 18px 24px;
+    cursor: pointer;
+}
+
+.main-bottom-section-icon {
+    margin-left: 10px;
+}
+
+.main-center-section-bluebright {
+    position: absolute;
+    top: 52%;
+    left: 49%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
+@media (min-width: 375px) and (max-width: 768px) {
+    .main-center-article-title{
+        font-size: 70px;
+        line-height: 70px;
+    }
+    
+    .main-bottom-section{
+        gap: 12px;
+    }
+    
+    .main-bottom-article-title{
+        font-size: 12px;
+        white-space: wrap;
+    }
+
+    .main-bottom-button{
+        padding: 9px 12px 9px 12px;
+        font-size: 12px;
+    }
+
+    .main-art{
+        height: 500px;
+    }
+}

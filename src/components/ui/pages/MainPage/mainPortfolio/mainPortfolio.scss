@@ -1,0 +1,266 @@
+.main-portfolio{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    margin-bottom: 120px;
+}
+
+.main-portfolio-text{
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+}
+
+.main-portfolio-title{
+    font-size: 80px;
+    font-weight: 500;
+    line-height: 88px;
+    text-align: left;
+
+    max-width: 668px;
+}
+
+.main-portfolio-description{
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 33.6px;
+    letter-spacing: -0.8px;
+
+    max-width: 668px;
+}
+
+.main-portfolio-block{
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    position: relative;
+}
+
+.main-portfolio-hover-pictures{
+    width: 668px;
+    height: 552px;
+
+    box-shadow: inset -5px 10px 60px rgba(255, 255, 255, 0.25);
+    background-color: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(24px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-portfolio-hover-pictures-text{
+    width: 300px;
+    text-align: center;
+
+    transform: rotate(-20deg);
+    font-size: 56px;
+    font-weight: 500;
+    line-height: 61.6px;
+
+}
+
+.ellipse-image{
+
+    position: absolute;
+    left: -250px;
+    top: 30px;
+}
+
+.main-portfolio-list-items{
+    display: flex;
+    flex-direction: column;
+}
+
+.main-portfolio-list-item{
+    width: 668px;
+    padding: 52px 24px 52px 24px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    cursor: pointer;
+
+    &:hover{
+        background-color: rgba(29, 29, 29, 0.2);
+    }
+
+    &::after{
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: 1px;
+        background-color: rgba(241, 241, 241, 0.2);
+    }
+}
+
+.main-portfolio-list-item:last-child{
+    &::before{
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 1px;
+        background-color: rgba(241, 241, 241, 0.2);
+    }
+}
+
+.main-portfolio-list-item-text{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+}
+
+.main-portfolio-list-item-count{
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 33.6px;
+}
+
+.main-portfolio-list-item-name{
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 33.6px;
+}
+
+@media (max-width: 1439px) {
+    .main-portfolio-hover-pictures{
+        width: 638px;
+    }
+
+    .main-portfolio-list-item{
+        width: 638px;
+    }
+}
+
+@media (max-width: 1366px) {
+    .main-portfolio-hover-pictures{
+        width: 628px;
+    }
+
+    .main-portfolio-list-item{
+        width: 628px;
+    }
+}
+
+@media (max-width: 1280px) {
+    .main-portfolio-hover-pictures{
+        width: 552px;
+    }
+
+    .main-portfolio-list-item{
+        width: 623px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .main-portfolio-hover-pictures{
+        width: 472px;
+    }
+
+    .main-portfolio-list-item{
+        width: 472px;
+    }
+
+    .main-portfolio-list-item-name{
+        font-size: 20px;
+    }
+
+    .main-portfolio-list-item-count{
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .main-portfolio-title{
+        font-size: 50px;
+        line-height: 50px;
+    }
+
+    .main-portfolio-description{
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .main-portfolio-list-item-count{
+        font-size: 14px;
+    }
+
+    .main-portfolio-list-item-name{
+        font-size: 12px;
+        line-height: 12px;
+    }
+
+    .main-portfolio-list-item{
+        width: 342px;
+        padding: 42px 24px;
+    }
+
+    .main-portfolio-hover-pictures{
+        width: 342px;
+        height: 472px;
+    }
+}
+
+@media (max-width: 767px) {
+
+    .main-portfolio{
+        margin-bottom: 60px;
+    }
+
+    .main-portfolio-title{
+        font-size: 50px;
+        line-height: 50px;
+    }
+
+    .main-portfolio-description{
+        font-size: 14px;
+        line-height: 22px;
+    }
+
+    .main-portfolio-list-item-count{
+        font-size: 14px;
+    }
+
+    .main-portfolio-list-item-name{
+        font-size: 12px;
+        line-height: 12px;
+    }
+
+    .main-portfolio-list-item{
+        width: 342px;
+        padding: 42px 24px;
+    }
+
+    .main-portfolio-hover-pictures{
+        width: 342px;
+        height: 372px;
+    }
+
+    .main-portfolio-text{
+        flex-direction: column;
+    }
+
+    .main-portfolio{
+        align-items: center;
+    }
+
+    .main-portfolio-block{
+        flex-direction: column;
+    }
+
+    .main-portfolio-title{
+        text-align: center;
+    }
+
+    .main-portfolio-description{
+        text-align: center;
+    }
+}
