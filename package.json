@@ -2,7 +2,7 @@
   "name": "aiagent",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/StartAppAgentsAIDevs/frontend_react",
+  "homepage": "https://startappagentsaidevs.github.io/frontend_react/",
   "dependencies": {
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
