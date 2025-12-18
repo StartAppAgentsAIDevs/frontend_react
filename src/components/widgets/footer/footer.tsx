@@ -18,46 +18,46 @@ const Footer: React.FC = () => {
     };
     return (
         <footer className="footer">
-            <nav className="footer-nav">
-                <ul className="footer-list">
-                    <h2 className="footer-item">
-                        <Link to="/" className="footer-link">DRIBBLE</Link>
+            <nav className="footer__nav">
+                <ul className="footer__list">
+                    <h2 className="footer__item">
+                        <Link to="/" className="footer__link">DRIBBLE</Link>
                     </h2>
-                    <h2 className="footer-item">
-                        <Link to="/" className="footer-link">BEHANCE</Link>
+                    <h2 className="footer__item">
+                        <Link to="/" className="footer__link">BEHANCE</Link>
                     </h2>
-                    <h2 className="footer-item">
-                        <Link to="/" className="footer-link">INSTAGRAM</Link>
+                    <h2 className="footer__item">
+                        <Link to="/" className="footer__link">INSTAGRAM</Link>
                     </h2>
-                    <h2 className="footer-item">
-                        <Link to="/" className="footer-link">TWITTER</Link>
+                    <h2 className="footer__item">
+                        <Link to="/" className="footer__link">TWITTER</Link>
                     </h2>
                 </ul>
-                <ul className="footer-second-title">
-                    <h2 className="footer-second-title-text">SCHRIFT</h2>
+                <ul className="footer__second__title">
+                    <h2 className="footer__second__title__text">SCHRIFT</h2>
                 </ul>
             </nav>
-            <article className="footer-text">
-                <h1 className="footer-text-title">
+            <article className="footer__text">
+                <h1 className="footer__text__title">
                     CREATE BOLD IDEAS TOGETHER
                 </h1>
-                <p className="footer-text-mail">
+                <p className="footer__text__mail">
                     HELLO@SCHRIFT.COM
                 </p>
             </article>
-            <article className="footer-up">
-                <h1 className="footer-up-text">
+            <article className="footer__up">
+                <h1 className="footer__up__text">
                     © Copyright Schrift 2024
                 </h1>
                 <img
-                    className="arrow-up"
+                    className="arrow__up"
                     src={ArrowUP}
                     alt="ellipse"
                     onClick={scrollToTop}
                 />
             </article>
             <img
-                className="ellipse-back"
+                className="ellipse__back"
                 src={Ellipse}
                 alt="ellipse"
             />

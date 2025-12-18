@@ -1,4 +1,4 @@
-.wrapper{
+.wrapper {
     max-width: 1360px;
 }
 
@@ -7,24 +7,120 @@
     flex-direction: column;
 }
 
-.main-art{
+.main-art {
+    position: relative;
     height: 800px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 
-    background-image: url('../../assets/images/MainSection.png');
+    // background-image: url('../../assets/images/MainSection.png');
     background-size: 100%;
     background-repeat: no-repeat;
     background-position: 50% 50%;
 
-    margin-bottom: 120px
+    margin-bottom: 120px;
+    z-index: 1;
+
+    // Для текста поверх облаков
+    &>*:not(.clouds-container) {
+        position: relative;
+        z-index: 2;
+    }
+}
+
+/* Контейнер облаков */
+.clouds-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* Облака */
+.cloud {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    filter: blur(40px);
+}
+
+.cloud-1 {
+    width: 300px;
+    height: 150px;
+    top: 20%;
+    left: 10%;
+    animation: float-1 25s infinite ease-in-out;
+    background: rgba(173, 216, 230, 0.4);
+}
+
+.cloud-2 {
+    width: 250px;
+    height: 120px;
+    top: 40%;
+    right: 15%;
+    animation: float-2 30s infinite ease-in-out;
+    background: rgba(224, 255, 255, 0.4);
+}
+
+.cloud-3 {
+    width: 200px;
+    height: 100px;
+    bottom: 30%;
+    left: 20%;
+    animation: float-3 35s infinite ease-in-out;
+    background: rgba(240, 248, 255, 0.4);
+}
+
+.cloud-4 {
+    width: 180px;
+    height: 90px;
+    top: 60%;
+    right: 25%;
+    animation: float-4 40s infinite ease-in-out;
+    background: rgba(176, 224, 230, 0.4);
+}
+
+.cloud-5 {
+    width: 220px;
+    height: 110px;
+    top: 15%;
+    right: 30%;
+    animation: float-5 45s infinite ease-in-out;
+    background: rgba(135, 206, 250, 0.4);
+}
+
+/* Слой поверх для эффекта "за стеклом" */
+.cloud-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.03) 0%,
+            rgba(255, 255, 255, 0.01) 50%,
+            rgba(255, 255, 255, 0.03) 100%);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    pointer-events: none;
 }
 
 .main-section {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    z-index: 1;
+}
+
+.main-center-section {
+    z-index: 1;
+}
+
+.main-bottom-section {
+    z-index: 1;
 }
 
 .main-article {
@@ -100,26 +196,26 @@
 }
 
 @media (min-width: 375px) and (max-width: 768px) {
-    .main-center-article-title{
+    .main-center-article-title {
         font-size: 70px;
         line-height: 70px;
     }
-    
-    .main-bottom-section{
+
+    .main-bottom-section {
         gap: 12px;
     }
-    
-    .main-bottom-article-title{
+
+    .main-bottom-article-title {
         font-size: 12px;
         white-space: wrap;
     }
 
-    .main-bottom-button{
+    .main-bottom-button {
         padding: 9px 12px 9px 12px;
         font-size: 12px;
     }
 
-    .main-art{
+    .main-art {
         height: 500px;
     }
 }

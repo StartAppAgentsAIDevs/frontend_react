@@ -16,7 +16,7 @@
     gap: 120px;
 }
 
-.footer-text {
+.footer__text {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -25,7 +25,7 @@
     gap: 16px;
 }
 
-.footer-text-title {
+.footer__text__title {
     text-align: center;
     max-width: 654px;
     font-size: 72px;
@@ -35,13 +35,13 @@
     letter-spacing: -0.1px;
 }
 
-.footer-text-mail {
+.footer__text__mail {
     font-size: 16px;
     line-height: 17.6px;
     font-weight: 500;
 }
 
-.footer-nav {
+.footer__nav {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -57,18 +57,18 @@
     }
 }
 
-.footer-list {
+.footer__list {
     display: flex;
     flex-direction: row;
     gap: 140px;
 }
 
-.footer-item {
+.footer__item {
     display: flex;
     align-items: flex-start;
 }
 
-.footer-link {
+.footer__link {
     font-size: 16px;
     line-height: 17.6px;
     font-weight: 500;
@@ -82,26 +82,26 @@
     }
 }
 
-.footer-second-title-text {
+.footer__second__title__text {
     font-size: 32px;
     line-height: 35.2px;
     font-weight: 500;
 }
 
-.footer-up {
+.footer__up {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-end;
 }
 
-.footer-up-text {
+.footer__up__text {
     font-size: 16px;
     line-height: 19.52px;
     font-weight: 400;
 }
 
-.ellipse-back {
+.ellipse__back {
     position: absolute;
     top: 62%;
     left: 40%;
@@ -109,7 +109,7 @@
     z-index: -1;
 }
 
-.arrow-up {
+.arrow__up {
     cursor: pointer;
     transition: transform 0.3s ease;
 
@@ -124,46 +124,46 @@
         height: 500px;
     }
 
-    .footer-text-title {
+    .footer__text__title {
         font-size: 50px;
         line-height: 50px;
     }
 
-    .footer-text-mail {
+    .footer__text__mail {
         font-size: 14px;
         line-height: 22px;
     }
 
-    .footer-list {
+    .footer__list {
         gap: 15px;
     }
 
-    .footer-text {
+    .footer__text {
         gap: 10px;
     }
 }
 
 @media (max-width: 767px) {
-    .ellipse-back {
-        width: 488px;
+    .ellipse__back {
+        width: 458px;
         height: 298px;
     }
 
-    .footer-link {
+    .footer__link {
         font-size: 10px;
         line-height: 12px;
     }
 
-    .footer-second-title-text {
+    .footer__second__title__text {
         font-size: 14px;
         line-height: 20px;
     }
 
-    .footer-list {
+    .footer__list {
         gap: 5px;
     }
 
-    .arrow-up {
+    .arrow__up {
         width: 40px;
         height: 40px;
     }

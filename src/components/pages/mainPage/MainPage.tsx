@@ -17,6 +17,16 @@ function MainPage() {
             <Header />
             <main className="main">
                 <section className="main-art">
+
+                    <div className="clouds-container">
+                        <div className="cloud cloud-1"></div>
+                        <div className="cloud cloud-2"></div>
+                        <div className="cloud cloud-3"></div>
+                        <div className="cloud cloud-4"></div>
+                        <div className="cloud cloud-5"></div>
+                        <div className="cloud-overlay"></div>
+                    </div>
+
                     <section className="main-section">
                         <article className="main-article">
                             <h1 className="main-article-title">EST 21.12.24</h1>
