@@ -1,0 +1,24 @@
+<svg width="1000" height="700" viewBox="0 0 1000 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="500" cy="350" r="200" fill="url(#paint0_linear_0_1)"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M480 350C492.712 350 500 342.712 500 330C500 342.712 507.288 350 520 350C507.288 350 500 357.288 500 370C500 357.288 492.712 350 480 350Z" fill="white"/>
+<path d="M500 700V0" stroke="url(#paint1_linear_0_1)" stroke-width="2"/>
+<path d="M1000 350L0 350" stroke="url(#paint2_linear_0_1)" stroke-width="2"/>
+<defs>
+<linearGradient id="paint0_linear_0_1" x1="500" y1="150" x2="500" y2="550" gradientUnits="userSpaceOnUse">
+<stop stop-color="#2068CA"/>
+<stop offset="0.31" stop-color="#2774DD"/>
+<stop offset="0.745" stop-color="#04B7F1"/>
+<stop offset="1" stop-color="#38CCFC"/>
+</linearGradient>
+<linearGradient id="paint1_linear_0_1" x1="500.5" y1="0" x2="500.5" y2="700" gradientUnits="userSpaceOnUse">
+<stop stop-color="white" stop-opacity="0.2"/>
+<stop offset="0.5" stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0.2"/>
+</linearGradient>
+<linearGradient id="paint2_linear_0_1" x1="0" y1="349.5" x2="1000" y2="349.5" gradientUnits="userSpaceOnUse">
+<stop stop-color="white" stop-opacity="0.2"/>
+<stop offset="0.5" stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0.2"/>
+</linearGradient>
+</defs>
+</svg>
