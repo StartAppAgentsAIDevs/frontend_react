@@ -51,7 +51,7 @@ const Header: React.FC = () => {
                         </ScrollLink>
                     </h2>
                 </ul>
-                <Link to={'/'} className="header__second__title">
+                <Link to={'/auth'} className="header__second__title">
                     <h2 className="header__second__title__text">ВХОД
                     </h2>
                     <img

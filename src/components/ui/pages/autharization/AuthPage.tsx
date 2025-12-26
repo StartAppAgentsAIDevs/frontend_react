@@ -29,19 +29,19 @@ function AuthPage() {
 
     return (
         <div className="auth-page">
-            <Link to={'/'} className="header__title">
-                <h2 className="header__title__text">SCHRIFT</h2>
+            <Link to={'/'} className="register-header__title">
+                <h2 className="register-header__title__text">SCHRIFT</h2>
             </Link>
-            {/* Форма по центру */}
+
             <div className="glass-form-container">
                 <div className="form-header">
-                    <h1 className="form-main-title">WELCOME BACK</h1>
-                    <p className="form-subtitle">Sign in to your account to continue</p>
+                    <h1 className="form-main-title">С ВОЗВРАЩЕНИЕМ</h1>
+                    <p className="form-subtitle">Войдите в аккаунт чтобы продолжить</p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="glass-form">
                     <div className="input-field">
-                        <label className="field-label">Email Address</label>
+                        <label className="field-label">Электронная почта</label>
                         <input
                             type="email"
                             name="email"
@@ -54,7 +54,7 @@ function AuthPage() {
                     </div>
 
                     <div className="input-field">
-                        <label className="field-label">Password</label>
+                        <label className="field-label">Пароль</label>
                         <input
                             type="password"
                             name="password"
@@ -70,32 +70,33 @@ function AuthPage() {
                         <label className="remember-me">
                             <input type="checkbox" />
                             <span className="checkbox-custom"></span>
-                            Remember me
+                            Запомнить меня
                         </label>
-                        <a href="#" className="forgot-password">Forgot password?</a>
+                        <a href="#" className="forgot-password">Забыли пароль?</a>
                     </div>
 
                     <button type="submit" className="submit-button">
-                        SIGN IN
+                        Войти
                     </button>
 
                     <div className="divider">
-                        <span>or</span>
+                        <span>или</span>
                     </div>
 
                     <button type="button" className="google-button">
-                        Continue with Google
+                        Войти с помощью Google
                     </button>
 
                     <p className="signup-link">
-                        Don't have an account?{' '}
-                        <button
+                        Нету аккаунта?{' '}
+                        <Link
+                            to={'/register'}
                             type="button"
                             className="link-button"
                             onClick={() => setIsLogin(false)}
                         >
-                            Sign up
-                        </button>
+                            Зарегистрироваться
+                        </Link>
                     </p>
                 </form>
             </div>

@@ -14,14 +14,14 @@ const MainAbout: React.FC = () => {
     return (
         <section className="main-about" id='about'>
             <section className="about-schrift">
-                <h1 className="about-schrift-title">ABOUT SCHRIFT</h1>
+                <h1 className="about-schrift-title">О SCHRIFT</h1>
                 <div className="about-schrift-block-image">
                     <div className="about-schrift-image"></div>
                 </div>
             </section>
             <section className="about-content">
                 <article className="about-content-description">
-                    <p>SCHRIFT IS A GRAPHIC DESIGN AGENCY FOCUSED ON CLARITY,IMPACT,AND PURPOSE.WE DELIVER DESIGNS THAT COMMUNICATE POWERFULLY AND AUTHENTICALLY</p>
+                    <p>SCHRIFT - ЭТО АГЕНТСТВО АЙТИ УСЛУГ, СОСРЕДОТОЧЕННОЕ НА ЯСНОСТИ, ВОЗДЕЙСТВИИ И ЦЕЛЕСООБРАЗНОСТИ.</p>
                 </article>
                 <article className="about-content-items">
                     <div className="about-content-item">
@@ -31,8 +31,8 @@ const MainAbout: React.FC = () => {
                             alt="Block"
                         />
                         <article className="about-content-item-article">
-                            <h1 className="about-content-item-title">PRECISION</h1>
-                            <p className="about-content-item-description">Every detail counts at Schrift. We believe in designing with intention, where every element serves a purpose.</p>
+                            <h1 className="about-content-item-title">ТОЧНОСТЬ</h1>
+                            <p className="about-content-item-description">В Schrift важна каждая деталь. Мы верим, что каждый элемент служит цели.</p>
                         </article>
                         <img
                             className="about-content-item-code"
@@ -47,8 +47,8 @@ const MainAbout: React.FC = () => {
                             alt="Block"
                         />
                         <article className="about-content-item-article">
-                            <h1 className="about-content-item-title">BOLD</h1>
-                            <p className="about-content-item-description">Our style is modern, sleek, and minimal, using clean lines and bold choices that make a statement.</p>
+                            <h1 className="about-content-item-title">СМЕЛОСТЬ</h1>
+                            <p className="about-content-item-description">Наша архитектура современная, с использованием новейших моделей AI.</p>
                         </article>
                         <img
                             className="about-content-item-code"
@@ -63,8 +63,8 @@ const MainAbout: React.FC = () => {
                             alt="Block"
                         />
                         <article className="about-content-item-article">
-                            <h1 className="about-content-item-title">CLIENT - CENTERED</h1>
-                            <p className="about-content-item-description">Your vision is our priority. We work closely with clients, valuing open communication and feedback at every step.</p>
+                            <h1 className="about-content-item-title">КЛИЕНТОЦЕНТРИЧНОСТЬ</h1>
+                            <p className="about-content-item-description">Ваше видение - наш приоритет. Мы тесно сотрудничаем с клиентами и ценим обратную связь.</p>
                         </article>
                         <img
                             className="about-content-item-code"
@@ -79,8 +79,8 @@ const MainAbout: React.FC = () => {
                             alt="Block"
                         />
                         <article className="about-content-item-article">
-                            <h1 className="about-content-item-title">CREATIVE EXCELLENCE</h1>
-                            <p className="about-content-item-description">Our team is composed of experienced designers who bring fresh, innovative perspectives to each project</p>
+                            <h1 className="about-content-item-title">СОВЕРШЕНСТВО</h1>
+                            <p className="about-content-item-description">Schrift состоит из опытных разработчиков, которые привносят инновационные решения в ваши проекты.</p>
                         </article>
                         <img
                             className="about-content-item-code"

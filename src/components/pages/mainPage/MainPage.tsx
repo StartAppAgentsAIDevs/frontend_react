@@ -30,7 +30,7 @@ function MainPage() {
                     <section className="main-section">
                         <article className="main-article">
                             <h1 className="main-article-title">EST 21.12.24</h1>
-                            <p className="main-article-description">A place where design philosophy blends innovation and clarity to create impactful solutions</p>
+                            <p className="main-article-description">Место, где философия дизайна соединяет инновации и ясность для создания значимых решений</p>
                         </article>
                         <img
                             className="main-section-image"
@@ -40,16 +40,16 @@ function MainPage() {
                     </section>
                     <section className="main-center-section">
                         <article className="main-center-article">
-                            <h1 className="main-center-article-title">The Art of Bold Precision</h1>
+                            <h1 className="main-center-article-title">Искусство Смелой Точности</h1>
                         </article>
                     </section>
                     <section className="main-bottom-section">
                         <article className="main-bottom-article">
-                            <h1 className="main-bottom-article-title">Bold Visions. Precise Execution</h1>
+                            <h1 className="main-bottom-article-title">Смелые Видения. Точное Исполнение</h1>
                         </article>
                         <div className="line"></div>
                         <button className="main-bottom-button">
-                            DISCOVER OUR WORK
+                            ОТКРОЙТЕ НАШИ РАБОТЫ
                             <img
                                 className="main-bottom-section-icon"
                                 src={Arrow}
