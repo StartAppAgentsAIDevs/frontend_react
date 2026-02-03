@@ -13,6 +13,12 @@ import './mainAbout.scss';
 const MainAbout: React.FC = () => {
     return (
         <section className="main-about" id='about'>
+            <div className="stars-container">
+                {/* 20 звезд */}
+                {Array.from({ length: 20 }).map((_, index) => (
+                    <div key={index} className="star"></div>
+                ))}
+            </div>
             <section className="about-schrift">
                 <h1 className="about-schrift-title">О SCHRIFT</h1>
                 <div className="about-schrift-block-image">

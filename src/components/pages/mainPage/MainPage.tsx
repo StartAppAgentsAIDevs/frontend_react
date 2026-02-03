@@ -1,8 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 import Code from '../../assets/images/code.svg';
-
 import Arrow from '../../assets/icons/arrow-bottom.svg';
-
 import './MainPage.scss';
 import Header from "../../widgets/header/header";
 import MainAbout from "../../ui/pages/MainPage/mainAbout/mainAbout";
@@ -17,14 +15,11 @@ function MainPage() {
             <Header />
             <main className="main">
                 <section className="main-art">
-
-                    <div className="clouds-container">
-                        <div className="cloud cloud-1"></div>
-                        <div className="cloud cloud-2"></div>
-                        <div className="cloud cloud-3"></div>
-                        <div className="cloud cloud-4"></div>
-                        <div className="cloud cloud-5"></div>
-                        <div className="cloud-overlay"></div>
+                    <div className="stars-container">
+                        {/* 20 звезд */}
+                        {Array.from({ length: 20 }).map((_, index) => (
+                            <div key={index} className="star"></div>
+                        ))}
                     </div>
 
                     <section className="main-section">

@@ -5,6 +5,12 @@ import './mainServices.scss';
 const MainServices: React.FC = () => {
     return (
         <section className="main-services" id="services">
+            <div className="stars-container">
+                {/* 20 звезд */}
+                {Array.from({ length: 20 }).map((_, index) => (
+                    <div key={index} className="star"></div>
+                ))}
+            </div>
             <article className="main-services-title">
                 <h1 className="main-services-text">
                     WHAT WE PROVIDE
@@ -57,7 +63,7 @@ const MainServices: React.FC = () => {
                                 Creative Consultation
                             </h2>
                             <p className="main-services-frame-item-description">
-                                Have a vision but not sure how to bring it to life? Our creative experts collaborate with you to develop bold and precise strategies tailored to your brand goals.                            
+                                Have a vision but not sure how to bring it to life? Our creative experts collaborate with you to develop bold and precise strategies tailored to your brand goals.
                             </p>
                         </div>
                     </div>

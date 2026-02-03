@@ -2,8 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 import MainPage from './components/pages/mainPage/MainPage';
-import AuthPage from './components/ui/pages/autharization/AuthPage';
-import RegisterPage from './components/ui/pages/Registration/RegisterPage';
+import AuthPage from './components/pages/autharization/AuthPage';
+import RegisterPage from './components/pages/Registration/RegisterPage';
 
 function App() {
   return (

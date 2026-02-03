@@ -1,4 +1,4 @@
-.header{
+.header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -10,7 +10,7 @@
     line-height: 19.52px;
     font-weight: 500;
 
-    &::after{
+    &::after {
         content: "";
         position: absolute;
         left: 0;
@@ -23,26 +23,26 @@
     margin-bottom: 16px;
 }
 
-.header__title{
+.header__title {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 8px;
 }
 
-.header__title__text{
+.header__title__text {
     font-size: 16px;
     line-height: 19.52px;
     font-weight: 500;
 }
 
-.header__second__title{
+.header__second__title {
     display: flex;
     gap: 5px;
     text-decoration: none;
 }
 
-.header__second__title__text{
+.header__second__title__text {
     font-size: 16px;
     line-height: 16px;
     font-weight: 500;
@@ -50,21 +50,22 @@
     color: rgba(241, 241, 241, 1);
 }
 
-.header__list{
+.header__list {
     display: flex;
     flex-direction: row;
     gap: 40px;
     padding: 3px 0px 3px 0px;
 }
 
-.header__nav{
+.header__nav {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 40px;
+    position: relative;
 }
 
-.header__link{
+.header__link {
     text-decoration: none;
     color: rgba(241, 241, 241, 1);
     font-size: 16px;
@@ -72,52 +73,213 @@
     font-weight: 500;
     cursor: pointer;
 
-    &:hover{
+    &:hover {
         opacity: 0.8;
     }
 }
 
-.header__title__icon__second{
+.header__title__icon__second {
     transform: rotate(225deg);
+    transition: transform 0.3s ease;
+
+    &--rotated {
+        transform: rotate(135deg);
+    }
+}
+
+.header__account {
+    cursor: pointer;
+    display: flex;
+    gap: 5px;
+
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+.header__account-container {
+    position: relative;
+}
+
+.account-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 10px;
+    background: rgba(30, 30, 30, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    min-width: 280px;
+    z-index: 1000;
+    animation: fadeInDown 0.3s ease;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.account-dropdown__header {
+    padding: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.account-dropdown__user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.account-dropdown__name {
+    font-size: 16px;
+    font-weight: 500;
+    color: rgba(241, 241, 241, 1);
+}
+
+.account-dropdown__email {
+    font-size: 14px;
+    color: rgba(241, 241, 241, 0.7);
+}
+
+.account-dropdown__actions {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.account-dropdown__action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+    color: rgba(241, 241, 241, 1);
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    &--account {
+        font-weight: 500;
+    }
+
+    &--logout {
+        color: rgba(255, 100, 100, 1);
+        justify-content: center;
+        font-weight: 500;
+
+        &:hover {
+            background-color: rgba(255, 100, 100, 0.1);
+        }
+    }
+}
+
+.account-dropdown__action-icon {
+    width: 12px;
+    height: 12px;
+    transform: rotate(225deg);
+    opacity: 0.7;
+}
+
+.header__account,
+.header__second__title {
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @media (min-width: 375px) and (max-width: 768px) {
-
-    .header{
+    .header {
         padding-bottom: 10px;
         margin-bottom: 10px;
     }
-    
-    .header__title{
+
+    .header__title {
         gap: 4px;
     }
 
-    .header__list{
+    .header__list {
         gap: 5px;
     }
 
-    .header__nav{
+    .header__nav {
         gap: 5px;
     }
 
-    .header__link{
+    .header__link {
         font-size: 12px;
     }
 
-    .header__title__icon{
+    .header__title__icon {
         width: 16px;
         height: 16px;
     }
 
-    .header__title__text{
+    .header__title__text {
         font-size: 12px;
     }
 
-    .header__second__title__text{
+    .header__second__title__text {
         font-size: 12px;
     }
 
-    .header__title__icon__second{
+    .header__title__icon__second {
         display: none;
+    }
+
+    .account-dropdown {
+        min-width: 250px;
+        right: -10px;
+    }
+
+    .account-dropdown__header {
+        padding: 15px;
+    }
+
+    .account-dropdown__name {
+        font-size: 14px;
+    }
+
+    .account-dropdown__email {
+        font-size: 12px;
+    }
+
+    .account-dropdown__action {
+        padding: 10px 12px;
+        font-size: 12px;
+    }
+}
+
+// Адаптация для очень маленьких экранов
+@media (max-width: 480px) {
+    .account-dropdown {
+        min-width: 220px;
+        right: -15px;
     }
 }

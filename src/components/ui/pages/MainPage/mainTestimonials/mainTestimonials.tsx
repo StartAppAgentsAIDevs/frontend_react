@@ -7,6 +7,12 @@ import './mainTestimonials.scss';
 const MainTestimonials: React.FC = () => {
     return (
         <section className="main-testimonials">
+            <div className="stars-container">
+                {/* 20 звезд */}
+                {Array.from({ length: 20 }).map((_, index) => (
+                    <div key={index} className="star"></div>
+                ))}
+            </div>
             <article className="main-testimonials-title">
                 <h1 className="main-testimonials-text">
                     WHAT THEY SAY
