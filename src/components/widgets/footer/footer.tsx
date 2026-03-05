@@ -56,11 +56,6 @@ const Footer: React.FC = () => {
                     onClick={scrollToTop}
                 />
             </article>
-            <img
-                className="ellipse__back"
-                src={Ellipse}
-                alt="ellipse"
-            />
         </footer>
     );
 }

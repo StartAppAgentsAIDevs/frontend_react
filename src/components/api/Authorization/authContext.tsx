@@ -1,16 +1,26 @@
 import React, { createContext, useState, useContext, useEffect, ReactNode } from 'react';
+import {
+    getAccessToken,
+    getRefreshToken,
+    saveTokens,
+    saveAuthTokens,
+    clearTokens,
+    logoutApi,
+    refreshToken as apiRefreshToken,
+    LoginResponse
+} from './apiAuth';
+import { getUserProfile } from '../getUser/apiUserData';
+import { UserProfile } from '../../types/userData';
 
-interface User {
-    email: string;
-}
-
+// Обновляем интерфейс пользователя
 interface AuthContextType {
-    user: User | null;
+    user: UserProfile | null;
     isAuthenticated: boolean;
     isLoading: boolean;
-    login: (tokens: { access_token: string; refresh_token: string }) => void;
-    logout: () => void;
+    login: (tokens: LoginResponse | { access_token: string; refresh_token: string }) => Promise<void>;
+    logout: () => Promise<void>;
     refreshToken: () => Promise<boolean>;
+    fetchUserProfile: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -28,20 +38,35 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-    const [user, setUser] = useState<User | null>(null);
+    const [user, setUser] = useState<UserProfile | null>(null);
     const [isLoading, setIsLoading] = useState(true);
 
-    // Проверяем наличие токена при загрузке
+    // Функция для получения профиля пользователя
+    const fetchUserProfile = async () => {
+        try {
+            const profile = await getUserProfile();
+            setUser(profile);
+        } catch (error: unknown) {
+            console.error('Ошибка при получении профиля:', error);
+            setUser(null);
+
+            // Проверяем, является ли ошибка объектом с сообщением
+            if (error instanceof Error) {
+                const errorMessage = error.message.toLowerCase();
+                if (errorMessage.includes('401') || errorMessage.includes('unauthorized')) {
+                    clearTokens();
+                }
+            }
+        }
+    };
+
+    // Проверяем наличие токена и получаем профиль при загрузке
     useEffect(() => {
         const checkAuth = async () => {
             try {
-                const accessToken = localStorage.getItem('access_token');
+                const accessToken = getAccessToken();
                 if (accessToken) {
-                    // Можно добавить проверку валидности токена
-                    const email = localStorage.getItem('user_email');
-                    if (email) {
-                        setUser({ email });
-                    }
+                    await fetchUserProfile();
                 }
             } catch (error) {
                 console.error('Auth check error:', error);
@@ -58,22 +83,48 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         let refreshInterval: NodeJS.Timeout;
 
         const setupTokenRefresh = () => {
-            const accessToken = localStorage.getItem('access_token');
-            const rememberMe = localStorage.getItem('remember_me') === 'true';
+            const accessToken = getAccessToken();
+            const refreshToken = getRefreshToken();
 
-            if (accessToken && rememberMe) {
-                // Обновляем токен каждые 29 минут (токены обычно живут 30 мин)
-                refreshInterval = setInterval(async () => {
-                    try {
-                        const success = await refreshToken();
-                        if (!success) {
+            if (accessToken && refreshToken) {
+                try {
+                    const payload = JSON.parse(atob(accessToken.split('.')[1]));
+                    const expiryTime = payload.exp * 1000;
+                    const currentTime = Date.now();
+
+                    if (expiryTime - currentTime < 5 * 60 * 1000) {
+                        apiRefreshToken();
+                    }
+
+                    refreshInterval = setInterval(async () => {
+                        try {
+                            const currentAccessToken = getAccessToken();
+                            if (!currentAccessToken) {
+                                clearInterval(refreshInterval);
+                                return;
+                            }
+
+                            const payload = JSON.parse(atob(currentAccessToken.split('.')[1]));
+                            const expiryTime = payload.exp * 1000;
+                            const currentTime = Date.now();
+
+                            if (expiryTime - currentTime < 5 * 60 * 1000) {
+                                const success = await apiRefreshToken();
+                                if (success) {
+                                    await fetchUserProfile();
+                                } else {
+                                    clearInterval(refreshInterval);
+                                }
+                            }
+                        } catch (error) {
+                            console.error('Auto token check failed:', error);
                             clearInterval(refreshInterval);
                         }
-                    } catch (error) {
-                        console.error('Auto token refresh failed:', error);
-                        clearInterval(refreshInterval);
-                    }
-                }, 29 * 60 * 1000); // 29 минут
+                    }, 60 * 1000);
+
+                } catch (error) {
+                    console.error('Error parsing token:', error);
+                }
             }
         };
 
@@ -86,50 +137,35 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         };
     }, []);
 
-    const login = (tokens: { access_token: string; refresh_token: string }) => {
-        localStorage.setItem('access_token', tokens.access_token);
-        localStorage.setItem('refresh_token', tokens.refresh_token);
-        // Получаем email из токена (можно декодировать JWT)
-        const tokenPayload = JSON.parse(atob(tokens.access_token.split('.')[1]));
-        const email = tokenPayload.email || tokenPayload.sub;
-        localStorage.setItem('user_email', email);
-        setUser({ email });
+    const login = async (tokens: LoginResponse | { access_token: string; refresh_token: string }): Promise<void> => {
+        if ('token_type' in tokens) {
+            saveTokens(tokens as LoginResponse);
+        } else {
+            saveAuthTokens(tokens.access_token, tokens.refresh_token);
+        }
+
+        await fetchUserProfile();
     };
 
-    const logout = () => {
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('refresh_token');
-        localStorage.removeItem('user_email');
-        localStorage.removeItem('remember_me');
-        setUser(null);
+    const logout = async (): Promise<void> => {
+        try {
+            await logoutApi();
+        } catch (error) {
+            console.error('Logout API error:', error);
+        } finally {
+            clearTokens();
+            setUser(null);
+        }
     };
 
     const refreshToken = async (): Promise<boolean> => {
         try {
-            const refreshToken = localStorage.getItem('refresh_token');
-            if (!refreshToken) {
-                logout();
-                return false;
-            }
-
-            const response = await fetch(`${process.env.REACT_APP_API_URL}/auth/refresh`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ refresh_token: refreshToken }),
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                localStorage.setItem('access_token', data.access_token);
-                localStorage.setItem('refresh_token', data.refresh_token);
+            const success = await apiRefreshToken();
+            if (success) {
+                await fetchUserProfile();
                 return true;
-            } else {
-                // Если refresh token невалиден, делаем логаут
-                logout();
-                return false;
             }
+            return false;
         } catch (error) {
             console.error('Token refresh error:', error);
             return false;
@@ -143,7 +179,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         login,
         logout,
         refreshToken,
+        fetchUserProfile,
     };
 
-    return <AuthContext.Provider value={ value }> { children } </AuthContext.Provider>;
+    return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

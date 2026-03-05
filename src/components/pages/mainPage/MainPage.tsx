@@ -2,6 +2,7 @@ import React from 'react';
 import Code from '../../assets/images/code.svg';
 import Arrow from '../../assets/icons/arrow-bottom.svg';
 import './MainPage.scss';
+import './Stars.scss';
 import Header from "../../widgets/header/header";
 import MainAbout from "../../ui/pages/MainPage/mainAbout/mainAbout";
 import MainServices from "../../ui/pages/MainPage/mainServices/mainSevices";

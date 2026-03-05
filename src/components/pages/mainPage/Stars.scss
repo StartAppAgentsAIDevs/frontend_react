@@ -1,0 +1,184 @@
+/* Контейнер звезд */
+.stars-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -20;
+}
+
+/* Стили для звезд */
+.star {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.8);
+    animation: twinkle var(--duration) ease-in-out infinite;
+}
+
+/* Создаем 20 звезд с разными позициями и размерами */
+.star:nth-child(1) {
+    top: 15%;
+    left: 10%;
+    width: 2px;
+    height: 2px;
+    --duration: 3s;
+}
+
+.star:nth-child(2) {
+    top: 25%;
+    left: 25%;
+    width: 1px;
+    height: 1px;
+    --duration: 2.5s;
+}
+
+.star:nth-child(3) {
+    top: 10%;
+    left: 40%;
+    width: 3px;
+    height: 3px;
+    --duration: 4s;
+}
+
+.star:nth-child(4) {
+    top: 35%;
+    left: 15%;
+    width: 1px;
+    height: 1px;
+    --duration: 3.5s;
+}
+
+.star:nth-child(5) {
+    top: 5%;
+    left: 30%;
+    width: 2px;
+    height: 2px;
+    --duration: 2s;
+}
+
+.star:nth-child(6) {
+    top: 20%;
+    left: 55%;
+    width: 1px;
+    height: 1px;
+    --duration: 5s;
+}
+
+.star:nth-child(7) {
+    top: 40%;
+    left: 45%;
+    width: 2px;
+    height: 2px;
+    --duration: 3s;
+}
+
+.star:nth-child(8) {
+    top: 30%;
+    left: 70%;
+    width: 3px;
+    height: 3px;
+    --duration: 4.5s;
+}
+
+.star:nth-child(9) {
+    top: 15%;
+    left: 85%;
+    width: 1px;
+    height: 1px;
+    --duration: 2.8s;
+}
+
+.star:nth-child(10) {
+    top: 50%;
+    left: 20%;
+    width: 2px;
+    height: 2px;
+    --duration: 3.2s;
+}
+
+.star:nth-child(11) {
+    top: 60%;
+    left: 35%;
+    width: 1px;
+    height: 1px;
+    --duration: 4s;
+}
+
+.star:nth-child(12) {
+    top: 45%;
+    left: 60%;
+    width: 3px;
+    height: 3px;
+    --duration: 2.5s;
+}
+
+.star:nth-child(13) {
+    top: 70%;
+    left: 10%;
+    width: 2px;
+    height: 2px;
+    --duration: 3.8s;
+}
+
+.star:nth-child(14) {
+    top: 65%;
+    left: 50%;
+    width: 1px;
+    height: 1px;
+    --duration: 3s;
+}
+
+.star:nth-child(15) {
+    top: 55%;
+    left: 75%;
+    width: 2px;
+    height: 2px;
+    --duration: 4.2s;
+}
+
+.star:nth-child(16) {
+    top: 80%;
+    left: 25%;
+    width: 3px;
+    height: 3px;
+    --duration: 2.7s;
+}
+
+.star:nth-child(17) {
+    top: 75%;
+    left: 40%;
+    width: 1px;
+    height: 1px;
+    --duration: 3.5s;
+}
+
+.star:nth-child(18) {
+    top: 85%;
+    left: 60%;
+    width: 2px;
+    height: 2px;
+    --duration: 4s;
+}
+
+.star:nth-child(19) {
+    top: 90%;
+    left: 80%;
+    width: 1px;
+    height: 1px;
+    --duration: 2.3s;
+}
+
+.star:nth-child(20) {
+    top: 95%;
+    left: 90%;
+    width: 3px;
+    height: 3px;
+    --duration: 5s;
+}
+
+@media (min-width: 375px) and (max-width: 768px) {
+    .star {
+        transform: scale(0.7);
+    }
+}

@@ -1,3 +1,5 @@
+import { Organization } from "./organization";
+
 export interface RegisterRequest {
     email: string;
     first_name: string;
@@ -7,15 +9,6 @@ export interface RegisterRequest {
     telegram_id?: string;
     password: string;
     organization_name?: string;
-}
-
-export interface Organization {
-    id: string;
-    name: string;
-    slug: string;
-    role: 'owner' | 'member' | 'admin';
-    joined_at: string;
-    is_active: boolean;
 }
 
 export interface UserResponse {

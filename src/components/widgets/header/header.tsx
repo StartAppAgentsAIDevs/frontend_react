@@ -12,12 +12,20 @@ const Header: React.FC = () => {
     const { isAuthenticated, isLoading, logout, user } = useAuth();
     const navigate = useNavigate();
     const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
+    const [isLoggingOut, setIsLoggingOut] = useState(false);
     const accountMenuRef = useRef<HTMLDivElement>(null);
 
-    const handleLogout = () => {
-        logout();
-        setIsAccountMenuOpen(false);
-        navigate('/');
+    const handleLogout = async () => {
+        try {
+            setIsLoggingOut(true);
+            await logout();
+            setIsAccountMenuOpen(false);
+            navigate('/');
+        } catch (error) {
+            console.error('Logout error:', error);
+        } finally {
+            setIsLoggingOut(false);
+        }
     };
 
     const handleAccountClick = (e: React.MouseEvent) => {
@@ -30,7 +38,23 @@ const Header: React.FC = () => {
         navigate('/account');
     };
 
-    // Закрытие меню при клике вне его
+    const getUserDisplayName = () => {
+        if (!user) return 'Загрузка...';
+
+        const firstName = user.first_name || '';
+        const lastName = user.last_name || '';
+
+        if (firstName && lastName) {
+            return `${lastName} ${firstName}`;
+        } else if (firstName) {
+            return firstName;
+        } else if (lastName) {
+            return lastName;
+        } else {
+            return 'Не указано';
+        }
+    };
+
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (accountMenuRef.current && !accountMenuRef.current.contains(event.target as Node)) {
@@ -44,10 +68,21 @@ const Header: React.FC = () => {
         };
     }, []);
 
+    if (isLoading) {
+        return (
+            <header className="header">
+                {/* Скелетон загрузки */}
+                <div className="header__skeleton">
+                    Загрузка...
+                </div>
+            </header>
+        );
+    }
+
     return (
         <header className="header">
             <div className="header__title">
-                <h2 className="header__title__text">SCHRIFT</h2>
+                <Link to={'/'} className="header__title__text">SCHRIFT</Link>
                 <img
                     className="header__title__icon"
                     src={BigArrowRight}
@@ -107,10 +142,10 @@ const Header: React.FC = () => {
                                 <div className="account-dropdown__header">
                                     <div className="account-dropdown__user-info">
                                         <div className="account-dropdown__name">
-                                            Иван Иванов
+                                            {getUserDisplayName()}
                                         </div>
                                         <div className="account-dropdown__email">
-                                            ivan@example.com
+                                            {user?.email || 'Не указано'}
                                         </div>
                                     </div>
                                 </div>
@@ -131,8 +166,9 @@ const Header: React.FC = () => {
                                     <button
                                         className="account-dropdown__action account-dropdown__action--logout"
                                         onClick={handleLogout}
+                                        disabled={isLoggingOut}
                                     >
-                                        Выйти
+                                        {isLoggingOut ? 'Выход...' : 'Выйти'}
                                     </button>
                                 </div>
                             </div>

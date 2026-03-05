@@ -1,0 +1,177 @@
+.account-sidebar {
+    width: 280px;
+    background: rgba(30, 30, 30, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.account-sidebar__header {
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.account-sidebar__title {
+    font-size: 24px;
+    font-weight: 600;
+    color: rgba(241, 241, 241, 1);
+    margin: 0;
+}
+
+.account-sidebar__nav {
+    flex: 1;
+}
+
+.account-sidebar__menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.account-sidebar__item {
+    width: 100%;
+}
+
+.account-sidebar__link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    text-decoration: none;
+    color: rgba(241, 241, 241, 0.7);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    background: transparent;
+    border: 1px solid transparent;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.05);
+        color: rgba(241, 241, 241, 1);
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    &--active {
+        background: rgba(255, 255, 255, 0.1);
+        color: rgba(241, 241, 241, 1);
+        border-color: rgba(255, 255, 255, 0.15);
+        font-weight: 500;
+    }
+}
+
+.account-sidebar__link-text {
+    font-size: 16px;
+    font-weight: inherit;
+}
+
+.account-sidebar__link-arrow {
+    font-size: 18px;
+    opacity: 0.6;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.account-sidebar__link:hover .account-sidebar__link-arrow {
+    opacity: 1;
+    transform: translateX(3px);
+}
+
+.account-sidebar__actions {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.account-sidebar__create-btn {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    color: rgba(241, 241, 241, 1);
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.1));
+        border-color: rgba(255, 255, 255, 0.25);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 1024px) {
+    .account-sidebar {
+        width: 240px;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .account-sidebar {
+        width: 100%;
+        position: static;
+        margin-bottom: 24px;
+    }
+
+    .account-sidebar__menu {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .account-sidebar__item {
+        flex: 1;
+        min-width: 140px;
+    }
+
+    .account-sidebar__link {
+        padding: 12px;
+    }
+
+    .account-sidebar__link-text {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .account-sidebar {
+        padding: 16px;
+        margin-bottom: 0px;
+    }
+
+    .account-sidebar__title {
+        font-size: 20px;
+    }
+
+    .account-sidebar__link {
+        padding: 10px 12px;
+    }
+
+    .account-sidebar__create-btn {
+        padding: 14px;
+        font-size: 14px;
+    }
+
+    .account-sidebar__menu {
+        flex-direction: column;
+    }
+
+    .account-sidebar__item {
+        width: 100%;
+    }
+}

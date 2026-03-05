@@ -28,3 +28,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@media (max-width: 480px) {
+  body {
+    padding: 15px;
+  }
+}

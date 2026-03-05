@@ -34,6 +34,8 @@
     font-size: 16px;
     line-height: 19.52px;
     font-weight: 500;
+    text-decoration: none;
+    color: rgba(241, 241, 241, 1);
 }
 
 .header__second__title {
@@ -107,7 +109,6 @@
     right: 0;
     margin-top: 10px;
     background: rgba(30, 30, 30, 0.95);
-    backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
     min-width: 280px;
@@ -276,7 +277,6 @@
     }
 }
 
-// Адаптация для очень маленьких экранов
 @media (max-width: 480px) {
     .account-dropdown {
         min-width: 220px;

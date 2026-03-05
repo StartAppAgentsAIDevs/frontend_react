@@ -1,21 +1,21 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './RegisterPage.scss';
-import '../../widgets/toast/Toast.scss';
 import { register } from '../../api/Registration/apiRegister';
 import { RegisterRequest } from '../../types/auth';
 import { FormData, FormErrors } from './utils/types/typesRegister';
 import { validateForm, validateField } from './utils/validation/validationRegister';
-import { useToast } from '../../widgets/toast/useToast';
+import { useToast } from '../../widgets/toast/ToastProvider';
 
 function RegisterPage() {
     const navigate = useNavigate();
-    const { toast, showToast, closeToast } = useToast();
+    const { showToast } = useToast();
 
     const [formData, setFormData] = useState<FormData>({
         first_name: '',
         last_name: '',
         email: '',
+        organization_name: '',
         password: '',
         confirmPassword: '',
         agreeTerms: false,
@@ -33,13 +33,11 @@ function RegisterPage() {
         setErrors(newErrors);
 
         if (Object.keys(newErrors).length > 0) {
-            // Показываем toast с первой ошибкой
             const firstError = Object.values(newErrors)[0];
             if (firstError) {
                 showToast(firstError, 'error', 4000);
             }
 
-            // Прокручиваем к первой ошибке
             const firstErrorField = Object.keys(newErrors)[0];
             if (firstErrorField) {
                 const element = document.querySelector(`[name="${firstErrorField}"]`);
@@ -50,12 +48,12 @@ function RegisterPage() {
             return;
         }
 
-        // Подготовка данных для API
         const registerData: RegisterRequest = {
             email: formData.email.trim(),
             first_name: formData.first_name.trim(),
             last_name: formData.last_name.trim(),
             password: formData.password,
+            organization_name: formData.organization_name.trim() || undefined,
         };
 
         try {
@@ -65,10 +63,8 @@ function RegisterPage() {
             const response = await register(registerData);
             console.log('Регистрация успешна:', response);
 
-            // Показываем успешный toast
             showToast('Регистрация успешна! Теперь вы можете войти в систему.', 'success', 4000);
 
-            // Успешная регистрация - перенаправляем на страницу входа
             setTimeout(() => {
                 navigate('/auth', {
                     state: {
@@ -86,7 +82,6 @@ function RegisterPage() {
                 errorMessage = err.message;
             }
 
-            // Показываем ошибку в toast
             showToast(errorMessage, 'error', 5000);
 
         } finally {
@@ -103,7 +98,6 @@ function RegisterPage() {
             [name]: newValue
         });
 
-        // Если поле уже было затронуто (touched), валидируем его
         if (touched[name]) {
             const newErrors = validateField(name as keyof FormData, newValue, formData, errors);
             setErrors(newErrors);
@@ -114,32 +108,27 @@ function RegisterPage() {
         const { name, value, type, checked } = e.target;
         const fieldValue = type === 'checkbox' ? checked : value;
 
-        // Помечаем поле как затронутое
         setTouched(prev => ({
             ...prev,
             [name]: true
         }));
 
-        // Валидируем поле
         const newErrors = validateField(name as keyof FormData, fieldValue, formData, errors);
         setErrors(newErrors);
     };
 
-    // Функция для определения класса поля ввода
     const getInputClassName = (fieldName: keyof FormErrors) => {
         const baseClass = "register-glass-input";
         const errorClass = errors[fieldName] ? "register-input-error" : "";
         return `${baseClass} ${errorClass}`.trim();
     };
 
-    // Функция для определения класса чекбокса
     const getCheckboxClassName = () => {
         const baseClass = "register-checkbox-custom";
         const errorClass = errors.agreeTerms ? "register-checkbox-error" : "";
         return `${baseClass} ${errorClass}`.trim();
     };
 
-    // Рендер поля ввода с ошибкой
     const renderInputField = (
         name: keyof FormData,
         label: string,
@@ -165,7 +154,6 @@ function RegisterPage() {
                         minLength={minLength}
                     />
                 </div>
-                {/* Фиксированное место для ошибки */}
                 <div className="register-error-container">
                     {errors[name] && (
                         <div className="register-field-error">
@@ -177,7 +165,6 @@ function RegisterPage() {
         );
     };
 
-    // Рендер поля пароля с подсказкой
     const renderPasswordField = (
         name: keyof FormData,
         label: string,
@@ -201,7 +188,6 @@ function RegisterPage() {
                         minLength={6}
                     />
                 </div>
-                {/* Фиксированное место для ошибки или подсказки */}
                 <div className="register-error-container">
                     {errors[name] ? (
                         <div className="register-field-error">
@@ -218,91 +204,59 @@ function RegisterPage() {
     };
 
     return (
-        <>
-            {/* Toast уведомление */}
-            {toast.isVisible && (
-                <div className={`register-toast ${toast.type} ${toast.isClosing ? 'toast-closing' : ''}`}>
-                    <div className={`toast-content ${toast.type}`}>
-                        <div className="toast-icon">
-                            {toast.type === 'error' ? '❌' : '✅'}
-                        </div>
-                        <div className="toast-message">{toast.message}</div>
-                        <button className="toast-close" onClick={closeToast}>
-                            ×
-                        </button>
-                    </div>
+        <div className="register-page">
+            <Link to={'/'} className="register-header__title">
+                <h2 className="register-header__title__text">SCHRIFT</h2>
+            </Link>
+
+            <div className="register-glass-form-container">
+                <div className="register-form-header">
+                    <h1 className="register-form-main-title">СОЗДАТЬ АККАУНТ</h1>
+                    <p className="register-form-subtitle">Присоединяйтесь к нам для начала работы</p>
                 </div>
-            )}
 
-            <div className="register-page">
-                <Link to={'/'} className="register-header__title">
-                    <h2 className="register-header__title__text">SCHRIFT</h2>
-                </Link>
+                <form onSubmit={handleSubmit} className="register-glass-form">
+                    {renderInputField('first_name', 'Имя', 'text', 'Иван', 2)}
 
-                <div className="register-glass-form-container">
-                    <div className="register-form-header">
-                        <h1 className="register-form-main-title">СОЗДАТЬ АККАУНТ</h1>
-                        <p className="register-form-subtitle">Присоединяйтесь к нам для начала работы</p>
+                    {renderInputField('last_name', 'Фамилия', 'text', 'Иванов', 2)}
+
+                    {renderInputField('email', 'Электронная почта', 'email', 'you@example.com')}
+
+                    {renderInputField('organization_name', 'Название организации', 'text', 'Ивашкино')}
+
+                    {renderPasswordField('password', 'Пароль', '••••••••')}
+
+                    {renderPasswordField('confirmPassword', 'Повторите пароль', '••••••••')}
+
+                    <div className="register-form-options">
+                        <label className="register-remember-me">
+                            <input
+                                type="checkbox"
+                                name="agreeTerms"
+                                checked={formData.agreeTerms}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                disabled={isLoading}
+                            />
+                            <span className={getCheckboxClassName()}></span>
+                            Я согласен с пользовательским соглашением
+                        </label>
                     </div>
 
-                    <form onSubmit={handleSubmit} className="register-glass-form">
-                        {renderInputField('first_name', 'Имя', 'text', 'Иван', 2)}
-
-                        {renderInputField('last_name', 'Фамилия', 'text', 'Иванов', 2)}
-
-                        {renderInputField('email', 'Электронная почта', 'email', 'you@example.com')}
-
-                        {renderPasswordField('password', 'Пароль', '••••••••')}
-
-                        {renderPasswordField('confirmPassword', 'Повторите пароль', '••••••••')}
-
-                        <div className="register-form-options">
-                            <label className="register-remember-me">
-                                <input
-                                    type="checkbox"
-                                    name="agreeTerms"
-                                    checked={formData.agreeTerms}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    disabled={isLoading}
-                                />
-                                <span className={getCheckboxClassName()}></span>
-                                Я согласен с пользовательским соглашением
-                            </label>
-                        </div>
-
-                        {/* Фиксированное место для ошибки чекбокса */}
-                        <div className="register-checkbox-error-container">
-                            {errors.agreeTerms && (
-                                <div className="register-field-error checkbox-error">
-                                    {errors.agreeTerms}
-                                </div>
-                            )}
-                        </div>
-
-                        <button
-                            type="submit"
-                            className="register-submit-button"
-                            disabled={isLoading}
-                        >
-                            {isLoading ? 'Регистрация...' : 'Создать аккаунт'}
-                        </button>
-
-                        <p className="register-signup-link">
-                            У вас уже есть аккаунт?{' '}
-                            <Link to="/auth" className="register-link-button">
-                                Войти
-                            </Link>
-                        </p>
-
-
-                        {/* 
-                    <div className="register-divider">
-                        <span>or</span>
+                    <div className="register-checkbox-error-container">
+                        {errors.agreeTerms && (
+                            <div className="register-field-error checkbox-error">
+                                {errors.agreeTerms}
+                            </div>
+                        )}
                     </div>
 
-                    <button type="button" className="register-google-button">
-                        Войти через Google
+                    <button
+                        type="submit"
+                        className="register-submit-button"
+                        disabled={isLoading}
+                    >
+                        {isLoading ? 'Регистрация...' : 'Создать аккаунт'}
                     </button>
 
                     <p className="register-signup-link">
@@ -310,11 +264,10 @@ function RegisterPage() {
                         <Link to="/auth" className="register-link-button">
                             Войти
                         </Link>
-                    </p> */}
-                    </form>
-                </div>
+                    </p>
+                </form>
             </div>
-        </>
+        </div>
     );
 };
 

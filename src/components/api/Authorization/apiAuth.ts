@@ -1,4 +1,5 @@
 import axios, { AxiosError } from 'axios';
+import { api } from '../api'
 
 export interface LoginRequest {
     email: string;
@@ -15,13 +16,62 @@ export interface RefreshTokenRequest {
     refresh_token: string;
 }
 
-// Экземпляр axios для перехвата ошибок
-const api = axios.create({
-    baseURL: process.env.REACT_APP_API_URL,
-    headers: {
-        'Content-Type': 'application/json',
-    },
-});
+// Время жизни токенов (в днях)
+const ACCESS_TOKEN_EXPIRY_DAYS = 1;
+const REFRESH_TOKEN_EXPIRY_DAYS = 7;
+
+
+// Функция для установки cookie на клиенте
+export const setCookie = (name: string, value: string, days: number = 7) => {
+    const expires = new Date();
+    expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000));
+    document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/;SameSite=Lax${process.env.NODE_ENV === 'production' ? ';Secure' : ''}`;
+};
+
+// Функция для получения cookie
+export const getCookie = (name: string): string | null => {
+    const nameEQ = name + "=";
+    const ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+};
+
+// Функция для удаления cookie
+export const deleteCookie = (name: string) => {
+    document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
+};
+
+// Сохраняем токены в cookies
+export const saveTokens = (tokens: LoginResponse) => {
+    setCookie('access_token', tokens.access_token, ACCESS_TOKEN_EXPIRY_DAYS);
+    setCookie('refresh_token', tokens.refresh_token, REFRESH_TOKEN_EXPIRY_DAYS);
+};
+
+// Альтернативная функция для сохранения только access и refresh токенов
+export const saveAuthTokens = (accessToken: string, refreshToken: string) => {
+    setCookie('access_token', accessToken, ACCESS_TOKEN_EXPIRY_DAYS);
+    setCookie('refresh_token', refreshToken, REFRESH_TOKEN_EXPIRY_DAYS);
+};
+
+// Очищаем все токены
+export const clearTokens = () => {
+    deleteCookie('access_token');
+    deleteCookie('refresh_token');
+    deleteCookie('user_email');
+    deleteCookie('remember_me');
+};
+
+export const getAccessToken = (): string | null => {
+    return getCookie('access_token');
+};
+
+export const getRefreshToken = (): string | null => {
+    return getCookie('refresh_token');
+};
 
 // Перехватчик для обновления токена при 401 ошибке
 api.interceptors.response.use(
@@ -33,7 +83,7 @@ api.interceptors.response.use(
             originalRequest._retry = true;
 
             try {
-                const refreshToken = localStorage.getItem('refresh_token');
+                const refreshToken = getRefreshToken();
                 if (refreshToken) {
                     const response = await axios.post<LoginResponse>(
                         `${process.env.REACT_APP_API_URL}/auth/refresh`,
@@ -41,18 +91,13 @@ api.interceptors.response.use(
                     );
 
                     const newTokens = response.data;
-                    localStorage.setItem('access_token', newTokens.access_token);
-                    localStorage.setItem('refresh_token', newTokens.refresh_token);
+                    saveTokens(newTokens);
 
-                    // Обновляем токен в оригинальном запросе
                     originalRequest.headers['Authorization'] = `Bearer ${newTokens.access_token}`;
                     return api(originalRequest);
                 }
             } catch (refreshError) {
-                // Если refresh не удался, делаем логаут
-                localStorage.removeItem('access_token');
-                localStorage.removeItem('refresh_token');
-                localStorage.removeItem('user_email');
+                clearTokens();
                 window.location.href = '/auth';
                 return Promise.reject(refreshError);
             }
@@ -65,7 +110,7 @@ api.interceptors.response.use(
 // Добавляем токен к запросам
 api.interceptors.request.use(
     (config) => {
-        const token = localStorage.getItem('access_token');
+        const token = getAccessToken();
         if (token) {
             config.headers['Authorization'] = `Bearer ${token}`;
         }
@@ -81,6 +126,8 @@ export const login = async (data: LoginRequest): Promise<LoginResponse> => {
         const response = await api.post<LoginResponse>('/auth/login', data);
 
         console.log('Авторизация успешна:', response.data);
+
+        saveTokens(response.data);
 
         return response.data;
 
@@ -117,27 +164,68 @@ export const login = async (data: LoginRequest): Promise<LoginResponse> => {
     }
 };
 
-export const refreshToken = async (refreshToken: string): Promise<LoginResponse> => {
+// API выхода
+export const logoutApi = async (): Promise<void> => {
+    try {
+        const refreshToken = getRefreshToken();
+        if (refreshToken) {
+            await api.post('/auth/logout', {
+                refresh_token: refreshToken
+            });
+        } else {
+            await api.post('/auth/logout');
+        }
+    } catch (error) {
+        console.error('Ошибка при выходе:', error);
+    } finally {
+        clearTokens();
+    }
+};
+
+export const refreshTokenApi = async (refreshToken: string): Promise<LoginResponse> => {
     const response = await api.post<LoginResponse>('/auth/refresh', {
         refresh_token: refreshToken,
     });
     return response.data;
 };
 
-export const logout = (): void => {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('refresh_token');
-    localStorage.removeItem('user_email');
-    localStorage.removeItem('remember_me');
+export const refreshToken = async (): Promise<boolean> => {
+    try {
+        const refreshToken = getRefreshToken();
+        if (!refreshToken) {
+            clearTokens();
+            return false;
+        }
+
+        const response = await refreshTokenApi(refreshToken);
+        saveTokens(response);
+        return true;
+    } catch (error) {
+        console.error('Token refresh error:', error);
+        clearTokens();
+        return false;
+    }
+};
+
+export const logout = async (): Promise<void> => {
+    await logoutApi();
 };
 
 export const isAuthenticated = (): boolean => {
-    return !!localStorage.getItem('access_token');
+    return !!getAccessToken();
 };
 
 export const getCurrentUser = () => {
-    const email = localStorage.getItem('user_email');
-    return email ? { email } : null;
+    const token = getAccessToken();
+    if (token) {
+        try {
+            const payload = JSON.parse(atob(token.split('.')[1]));
+            const email = payload.email || payload.sub;
+            return email ? { email } : null;
+        } catch (error) {
+            console.error('Error decoding token:', error);
+            return null;
+        }
+    }
+    return null;
 };
-
-export { api };

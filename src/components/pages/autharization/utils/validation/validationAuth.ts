@@ -41,7 +41,6 @@ export const validateField = (
 ): FormErrors => {
     const newErrors = { ...currentErrors };
 
-    // Удаляем ошибку только для полей, которые есть в FormErrors
     if (name === 'email' || name === 'password') {
         delete newErrors[name];
     }
@@ -56,7 +55,6 @@ export const validateField = (
             if (passwordError) newErrors.password = passwordError;
             break;
         case 'rememberMe':
-            // rememberMe не требует валидации
             break;
     }
 
